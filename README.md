@@ -41,7 +41,8 @@ export default defineComponent({
     name: 'Foo',
     beforeCreate () {
         this.$cc.on('consent-changed', () => {
-            console.log('cookie consent changed, new user preferences:', vm.$cc.getUserPreferences())
+            console.log('cookie consent changed, new user preferences:', 
+                this.$cc.getUserPreferences())
             // your business logic..
         })
     }
