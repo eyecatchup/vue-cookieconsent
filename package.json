@@ -1,10 +1,12 @@
 {
   "name": "vue-cookieconsent",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "A Vue plugin, that wraps the awesome `cookieconsent` library.",
   "main": "./lib/src/index.js",
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "src/**/*",
+    "vendor/**/*"
   ],
   "scripts": {
     "build": "tsc && cp ./vendor/cookieconsent.css ./lib/vendor/cookieconsent.css",
@@ -14,13 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:eyecatchup/vue-cookieconsent.git"
+    "url": "git+ssh://git@github.com/eyecatchup/vue-cookieconsent.git"
   },
   "license": "MIT",
-  "author": {
-    "name": "Stephan Schmitz",
-    "email": "eyecatchup@gmail.com"
-  },
+  "author": "Stephan Schmitz <eyecatchup@gmail.com>",
   "engines": {
     "node": ">=12.0"
   },
@@ -48,5 +47,20 @@
     "branches": [
       "main"
     ]
-  }
+  },
+  "types": "./lib/src/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/eyecatchup/vue-cookieconsent/issues"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [
+    "gdpr",
+    "dsgvo",
+    "cookies",
+    "cookie consent",
+    "cookiebanner",
+    "cookie banner"
+  ]
 }
