@@ -7,7 +7,7 @@
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp ./vendor/cookieconsent.css ./lib/vendor/cookieconsent.css",
     "clean": "rm -rf ./lib/",
     "lint": "eslint ./src/ --fix",
     "typecheck": "tsc --noEmit"
