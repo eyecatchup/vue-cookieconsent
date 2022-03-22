@@ -1,6 +1,6 @@
 {
   "name": "vue-cookieconsent",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A Vue plugin, that wraps the awesome `cookieconsent` library.",
   "main": "./lib/src/index.js",
   "files": [

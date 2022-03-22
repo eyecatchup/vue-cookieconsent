@@ -6,6 +6,8 @@ declare let initCookieConsent: any
 
 const CookieConsentPlugin = {
     install (Vue: any, options: any) {
+        console.log('[vue-cookieconsent] Install plugin', options)
+
         // merge default and client options
         options = {...defaultOptions, ...options}
 
@@ -23,25 +25,25 @@ const CookieConsentPlugin = {
 
         // The concept of curried functions, allows us to have 
         // a named function with arguments AND later call `removeEventListener`.
-        const curryFn = function(eventName: string, fn: Function = () => { console.log('[vue-cookieconsent] Remove plugin event listener') }) {
+        const curryFn = function(
+            eventName: string, 
+            fn: Function = () => { console.log('[vue-cookieconsent] Cleanup on unmount') }
+        ) {
             return function curriedFn() {
-                console.log(`[vue-cookieconsent] calling ${eventName} handler`);
+                console.log(`[vue-cookieconsent] Call "${eventName}" handler`);
                 fn()
             }
         }
 
         // @ts-ignore
         if (!window._cookieconsent) {
-            console.log('[vue-cookieconsent] Init cookie consent plugin', options, Vue)
-
-            // init cookieconsent lib
-            let cc = initCookieConsent()
+            console.log('[vue-cookieconsent] Init cookie consent lib', options)
 
             // @ts-ignore
             window._cookieconsent = true
             
             // Assign custom property to the Vue instance
-            Vue.config.globalProperties.$cc = cc
+            Vue.config.globalProperties.$cc = initCookieConsent()
 
             // Register a Vue-like `on` method for the client to hook into lib events.
             // Note: `eventName` just exists to match the expected syntax for `on`.
@@ -51,14 +53,11 @@ const CookieConsentPlugin = {
 
             // This prevents, that scripts are NOT being updated.
             // @TODO Further debug why it happens
-            document.addEventListener('DOMContentLoaded', cc.run(options), false)  
+            document.addEventListener('DOMContentLoaded', 
+                Vue.config.globalProperties.$cc.run(options), false)  
         }
 
         Vue.mixin({
-            created () {
-                // @ts-ignore
-                !window._cookieconsent && initCC()
-            },
             unmounted () {
                 window.removeEventListener('consentChanged', curryFn(''))
             }
