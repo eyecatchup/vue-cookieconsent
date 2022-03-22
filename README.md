@@ -32,9 +32,9 @@ const app = createApp(App)
 ```
 ### Usage
 
-The Cookieconsent instance is globally available via `this.$cc`, providing the full library API. See the Cookieconsent [API documentation](https://github.com/orestbida/cookieconsent/#api-methods) for all avilable methods.
+The Cookieconsent instance is globally available via `this.$cc`, providing the full library API. See the Cookieconsent [API documentation](https://github.com/orestbida/cookieconsent/#api-methods) for all available methods.
 
-Register a handler to be executed whenever the consent settings change:
+To hook into the library's event callbacks, there's an additional `on` method, which can be used in your Vue components to register a handler to be executed whenever the consent settings change.
 
 ```js
 export default defineComponent({
