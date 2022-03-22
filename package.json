@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:eyecatchup/vue-cookieconsent.git"
   },
   "license": "MIT",
   "author": {
