@@ -52,9 +52,10 @@ const CookieConsentPlugin = {
             }
 
             // This prevents, that scripts are NOT being updated.
-            // @TODO Further debug why it happens
-            document.addEventListener('DOMContentLoaded', 
-                Vue.config.globalProperties.$cc.run(options), false)  
+            // @TODO Further debug why it happens 
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(Vue.config.globalProperties.$cc.run(options), 10)
+            }, false); 
         }
 
         Vue.mixin({
