@@ -8,6 +8,7 @@ const defaultOptions = {
     cookie_expiration: 365,                     // default: 182
     force_consent: false,                        // default: false
     page_scripts: true,
+    debug: false,
     gui_options: {
         consent_modal: {
             layout: 'cloud',               // box/cloud/bar
