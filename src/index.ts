@@ -6,20 +6,26 @@ declare let initCookieConsent: any
 
 const CookieConsentPlugin = {
     install (Vue: any, options: any) {
-        console.log('[vue-cookieconsent] Install plugin', options)
-
         // merge default and client options
         options = {...defaultOptions, ...options}
+        
+        if(options.debug) {
+            console.log('[vue-cookieconsent] Install plugin', options)
+        }
 
         // setup cookieconsent lib event handler
         // see: https://github.com/orestbida/cookieconsent/blob/master/Readme.md#available-callbacks
         options.onAccept = () => {
-            console.log('[cookieconsent] onAccept fired!')
+            if(options.debug) {
+                console.log('[cookieconsent] onAccept fired!')
+            }
             window.dispatchEvent(new Event('consentChanged'))
         }
 
         options.onChange = () => {
-            console.log('[cookieconsent] onChange fired!')
+            if(options.debug) {
+                console.log('[cookieconsent] onChange fired!')
+            }
             window.dispatchEvent(new Event('consentChanged'))
         }
 
@@ -27,17 +33,22 @@ const CookieConsentPlugin = {
         // a named function with arguments AND later call `removeEventListener`.
         const curryFn = function(
             eventName: string, 
-            fn: Function = () => { console.log('[vue-cookieconsent] Cleanup on unmount') }
-        ) {
+            fn: Function = () => { 
+                if(options.debug) { console.log('[vue-cookieconsent] Cleanup on unmount'); }
+        }) {
             return function curriedFn() {
-                console.log(`[vue-cookieconsent] Call "${eventName}" handler`);
+                if(options.debug) {
+                        console.log(`[vue-cookieconsent] Call "${eventName}" handler`);
+                }
                 fn()
             }
         }
 
         // @ts-ignore
         if (!window._cookieconsent) {
-            console.log('[vue-cookieconsent] Init cookie consent lib', options)
+            if(options.debug) {
+                console.log('[vue-cookieconsent] Init cookie consent lib', options)
+            }
 
             // @ts-ignore
             window._cookieconsent = true
